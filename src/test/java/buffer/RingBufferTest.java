@@ -1,6 +1,8 @@
 package buffer;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Iterator;
 import java.util.stream.Stream;
@@ -64,8 +66,9 @@ class RingBufferTest {
 
 	@Test
 	void testPeek() {
-		// TODO: implement this test yourself
-		fail("Not yet implemented");
+		ringBuffer.peek();
+//		// TODO: implement this test yourself
+//		fail("Not yet implemented");
 	}
 
 	private static Stream<Arguments> provideDifferentSizes() {

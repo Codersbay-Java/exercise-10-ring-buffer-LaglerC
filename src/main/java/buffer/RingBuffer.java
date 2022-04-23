@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
  */
 public class RingBuffer {
 	private String[] queue;
-	private int numberOfElementsOnQueue = 0;
+	private int numberOfElementsOnQueue;
 	private int first = 0; // index of first element of queue
 	private int last = 0; // index of next available slot
 
@@ -28,21 +28,27 @@ public class RingBuffer {
 	 * TODO: capacity Returns the number of elements the buffer can hold.
 	 */
 	public int capacity() {
-		return -1;
+		return queue.length;
 	}
 
 	/**
 	 * TODO: size Returns the number of elements in the buffer.
 	 */
 	public int size() {
-		return -1;
+		numberOfElementsOnQueue = 0;
+		for (int i = 0; i < queue.length; i++) {
+			if (queue[i] != null) {
+				numberOfElementsOnQueue++;
+			}
+		}
+		return numberOfElementsOnQueue;
 	}
 
 	/**
 	 * TODO: isEmpty Returns true if the buffer contains no elements.
 	 */
 	public boolean isEmpty() {
-		return false;
+		return size() == 0;
 	}
 
 	/**
@@ -50,7 +56,7 @@ public class RingBuffer {
 	 * the maximum number of elements it can hold, before overwriting elements.
 	 */
 	public boolean isFull() {
-		return false;
+		return size() == queue.length;
 	}
 
 	/**
@@ -61,7 +67,12 @@ public class RingBuffer {
 	 * @param item to be appended to the buffer.
 	 */
 	public void enqueue(String item) {
-		
+		queue[last] = item;
+		last = (last + 1);
+		if (size() == queue.length) {
+			last = 0;
+		}
+
 	}
 
 	/**
@@ -70,7 +81,10 @@ public class RingBuffer {
 	 * @throws a RuntimeException if the buffer is empty.
 	 */
 	public String peek() {
-		return null;
+		if (isEmpty()) {
+			throw new IllegalArgumentException("Sorry, buffer is empty!");
+		}
+		return queue[first];
 	}
 
 	/**
